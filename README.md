@@ -1,16 +1,15 @@
-<script>
-  var details = document.querySelectorAll('details');
-  details.forEach(function (detail) {
-    detail.addEventListener('click', function () {
-      // Close other open details elements
-      details.forEach(function (otherDetail) {
-        if (otherDetail !== detail) {
-          otherDetail.removeAttribute('open');
-        }
-      });
-    });
-  });
-</script>
+# OctoAI Application Development Quickstart Guide
+Welcome to the OctoAI Application Development Quickstart Guide!  This guide will walk you through the process of building, deploying, and sharing your own Generative AI application using the OctoAI compute service. 
+
+If you're brand new to OctoAI, or building, running, tuning, and scaling ML-powered applications, the best place to start is the Stable Diffusion Image Generation Playground. This end-to-end example will walk you through the process of building, deploying, and sharing your own text-to-image Generative AI application powered by OctoAI.  
+
+If you're already familiar with using the OctoAI platform, keep reading to learn how to build a chatbot that can answer questions about the IMDB movie database and how to use LLMs to perform plain-english quieries on a SQL database.
+
+## Table of Contents
+
+1. [Stable Diffusion Image Generation Playground Quickstart Guide here](#stable-diffusion-image-generation-playground-quick-start-guide-🖼️🤖)
+2. [Building a Moviebot Chat App ](#building-a-moviebot-chat-app)
+3. [SQL Queries in Plain English using LLMs](#query-a-sql-database-in-plain-english-with-llms)
 
 
 # Stable Diffusion Image Generation Playground Quick Start Guide 🖼️🤖
@@ -23,7 +22,7 @@ Let’s get started!
 
 https://www.loom.com/share/a2009909784e4da6b2f850035785aebd
 
-# Preliminaries
+## Preliminaries
 
 Here are the primary tools that we’ll be using:
 
@@ -35,7 +34,7 @@ Here are the primary tools that we’ll be using:
     - [Base64](https://docs.python.org/3/library/base64.html#module-base64): Provides the decoding functionality we need to see our generated images for our images after they’re received in an encoded format from the OctoML compute service API.
     - [Time](https://docs.python.org/3/library/time.html): This library is used to time how long it takes to generate each image.
 
-# 🐙 Step 1: Sign up for OctoAI
+## 🐙 Step 1: Sign up for OctoAI
 
 To use the OctoAI compute service, first sign up for an account and get your credentials and endpoint URL. Here’s how:
 
@@ -48,9 +47,9 @@ To use the OctoAI compute service, first sign up for an account and get your cre
 - Copy your `API Key` and your `Endpoint URL`. You’ll need these later to connect your app to the OctoAI compute service.
 
 <details>
-  <summary>Click to expand</summary>
+  <summary  style="font-size: larger;" >Click to continue reading...</summary>
 
-# 🧑‍💻 Step 2: Build the application
+## 🧑‍💻 Step 2: Build the application
 
 Now that you have your credentials and endpoint URL, you can build a simple application that uses OctoAI to generate images from text prompts. Here’s what you need to do:
 
@@ -64,14 +63,14 @@ Now that you have your credentials and endpoint URL, you can build a simple appl
     </aside>
     
 
-# 💻 Step 3: Create a Virtual Environment & Install Streamlit
+## 💻 Step 3: Create a Virtual Environment & Install Streamlit
 
 - Install the appropriate version of [Miniconda](https://docs.conda.io/en/latest/miniconda.html) for your OS
 - From the terminal, create a conda environment using `conda create --name stablediffapp`
 - Activate conda environment with `conda activate stablediffapp`
 - Install the only library you’ll need using `pip install streamlit`
 
-# 🚢 Step 3: Deploy and run the application!
+## 🚢 Step 3: Deploy and run the application!
 
 Now that you have built your application, you can deploy it locally within your conda environment using the pre-built script that we’ve provided. Here’s how:
 
@@ -87,7 +86,7 @@ Screenshot of the completed 3-panel Stable Diffusion Image Generation Playground
 
 Screenshot of each of the parameters associated with image generation in Stable Diffusion.
 
-# 📚 [OPTIONAL] Step 4: Learn About Stable Diffusion Parameters!
+## 📚 [OPTIONAL] Step 4: Learn About Stable Diffusion Parameters!
 
 It is important to note that Stable Diffusion operates by first generating a  random image in the latent space of the diffusion model.  The noise predictor estimates the noise within the image, which is then subtracted from the images.  This denoising process is called sampling, and takes place in `sampling steps`.
 
@@ -148,7 +147,7 @@ With that background in mind, let’s take a closer look at each of the five par
 
 Now it’s time to run your application and see what amazing images OctoML can generate for you as you play with each of the five core parameters. 
 
-# 🚀 [OPTIONAL] Step 5: Sharing Your App with Your Team!
+## 🚀 [OPTIONAL] Step 5: Sharing Your App with Your Team!
 
 Sharing your Streamlit app is really easy to do, including directly through the embedded GitHub badge like we’ve done at the top of this repo!
 
@@ -163,7 +162,7 @@ Follow [this tutorial](https://docs.streamlit.io/streamlit-community-cloud/get-s
 
 </aside>
 
-# Conclusion
+## Conclusion
 
 Congratulations! You have successfully build, shipped, and shared a production Stable Diffusion app to generate realist images from text prompts!
 
@@ -175,7 +174,7 @@ We hope you enjoyed this quick-start guide. Thank you for using OctoAI!
 
 For a deep-dive on exactly what is in the application code, we’ve outlined each core piece, step-by-step, below for your reference.
 
-# ⌨️ Step-by-Step Code Breakdown
+## ⌨️ Step-by-Step Code Breakdown
 
 Now, we’ll walk through all of the core components of a simple Stable Diffusion Application, step-by-step.  In this appendix, you’ll learn:
 
@@ -183,7 +182,7 @@ Now, we’ll walk through all of the core components of a simple Stable Diffusio
 2. Streamlit syntax for creating various page elements and input types including text and number inputs, select boxes, and sliders.
 3. How easy it leverage OctoAI with simple definitions of the `url` and `payload`. 
 
-## 1. Install Dependencies
+### 1. Install Dependencies
 
 `requests` is necessary for calling the OctoAI API.  `streamlit` is for our front end application, and `base64` is required to decode the generated image returned by OctoAI.
 
@@ -193,9 +192,9 @@ import streamlit as st
 import base64
 ```
 
-## 2. Set Up Streamlit App
+### 2. Set Up Streamlit App
 
-### 2.1. Title & Description
+#### 2.1. Title & Description
 
 This section adds a title and description for our Image Generation Playground.
 
@@ -204,7 +203,7 @@ st.title("Stable Diffusion Image Generation Playground 🖼️🤖")
 st.subheader("Directions: Use the Stable Diffusion Playground to learn how parameters affect image generation.")
 ```
 
-### 2.2. Prompt Input
+#### 2.2. Prompt Input
 
 This is where the user creates the prompt for image generation!  We fill in the input box with the default text of `"A photo of an octopus playing chess"`
 
@@ -213,7 +212,7 @@ st.header("Prompt")
 prompt = st.text_input("Text for Image Generation", "A photo of an octopus playing chess")
 ```
 
-## 3. Stable Diffusion API Call via OctoAI
+### 3. Stable Diffusion API Call via OctoAI
 
 **This is the core of the application**.  It includes the following steps:
 
@@ -222,7 +221,7 @@ prompt = st.text_input("Text for Image Generation", "A photo of an octopus playi
 - Consuming the API directly through the OctoAI
 - Decoding the API response so that we can view our generated image!
 
-### 3.1. Collect Stable Diffusion Parameter Inputs
+#### 3.1. Collect Stable Diffusion Parameter Inputs
 
 First, five Stable Diffusion parameter inputs are collected and passed through to the OctoAI compute service.  These include `negative_prompt`, `num_inference_steps`, `scheduler`, `guidance_scale`, and `seed`.
 
@@ -234,7 +233,7 @@ guidance_scale = st.slider("Classifier-Free Guidance (CFG) Scale", 1.0, 20.0, 7.
 seed = st.number_input("Starting Seed", min_value=0, value=42, help="Initialize generations with the same starting seed for more reproducible images")
 ```
 
-### 3.2. Define URL and Stable Diffusion Parameters for OctoAI
+#### 3.2. Define URL and Stable Diffusion Parameters for OctoAI
 
 Next, upon clicking the “Generate Image” button, the URL to OctoAI’s compute service is defined, and the parameters are set up in JSON format to be passed through to the API.
 
@@ -251,7 +250,7 @@ if st.button("Generate Image"):
     }
 ```
 
-### 3.3. Calling OctoAI’s Compute Service
+#### 3.3. Calling OctoAI’s Compute Service
 
 Consuming the API is as simple as sending a `POST` command to the pre-defined `url` with the parameters defined within the `payload`.  The timer here serves only as a way to measure the time for each image generation.
 
@@ -259,7 +258,7 @@ Consuming the API is as simple as sending a `POST` command to the pre-defined `u
 response = requests.post(endpoint_url, json=payload)
 ```
 
-### 3.4. Decoding and Displaying the Generated Image
+#### 3.4. Decoding and Displaying the Generated Image
 
 Following the API call to OctoAI, the image can be extracted from the response.  In order to view the encoded image that is returned, it must first be decoded.  The image is then displayed directly within the app.
 
@@ -275,6 +274,18 @@ st.image("image.png")
 Congratulations!  Now you understand the core components required to build a simple Stable Diffusion Application using OctoAI and Streamlit!
 </details>
 
+# Building a Moviebot Chat App 
+Here's some placeholder text for the MovieBot chat app instructions. We'll also have a demo video here soon.
+
+## Preliminaries
+
+## 🐙 Step 1: Sign up for OctoAI
+Be sure you've signed up for OctoAI. Steps to follow are found in the [Getting Started](https://docs.octoai.cloud/docs/getting-started) section of our docs.
+
+
+# Query a SQL Database in Plain-English with LLMs
+
+# 📚 Next Steps
 If you have any questions or comments, please check our [docs](https://docs.octoai.cloud/docs) or reach out and ask a question directly in our [discord community](https://discord.com/invite/rXTPeRBcG7)!  We look forward to seeing what you build next!
 
 Thanks for using OctoAI!
