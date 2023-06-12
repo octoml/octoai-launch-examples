@@ -1,0 +1,3 @@
+[submodule "sd_app_quickstart"]
+	path = sd_app_quickstart
+	url = https://github.com/gregloughnane/octoml-dev.git
