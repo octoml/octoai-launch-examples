@@ -18,18 +18,19 @@ This walkthrough assumes you already have some basic familiarity with the OctoAI
 * When you're ready to build your own production-grade chatbot, click the `Clone` button below the cURL Example to create a new endpoint from this template.
 * Copy the `Endpoint URL`
 
-# 🧑‍💻 Step 2: Build the MovieBot Application
+# 💻 Step 2: Create a New Virtual Environment & Install Streamlit
+1. Install the appropriate version of [Miniconda](https://docs.conda.io/en/latest/miniconda.html) for your OS.
+2. From the terminal, create a conda environment using `conda create --name moviebotapp`.
+3. Activate conda environment with `conda activate moviebotapp`.
+
+# 🧑‍💻 Step 3: Build the MovieBot Application
 Like before, we will be using Streamlit to run our chat application. The code for this application is in the `/moviebot` folder of this repo. 
-* Clone this repo to your local machine using `git clone`. 
+* Clone this repo to your local machine using `git clone`.
+* Install application dependencies with `pip install -r requirements.txt`.
 * Create a new `OCTOAI_API_TOKEN`. You can create new keys under "Settings" (the gear icon to the left) in the OctoAI dashboard.
 * Be sure your `OCTOAI_API_TOKEN` is set in your '/.streamlit/secrets.toml' file as `OCTOAI_API_TOKEN="<paste token here>"`
 * Add your ENDPOINT_URL to the '/.streamlit/secrets.toml' file as `ENDPOINT_URL="<paste url here>"`. 
 
-# 💻 Step 3: Create a New Virtual Environment & Install Streamlit
-1. Install the appropriate version of [Miniconda](https://docs.conda.io/en/latest/miniconda.html) for your OS.
-2. From the terminal, create a conda environment using `conda create --name moviebotapp`.
-3. Activate conda environment with `conda activate moviebotapp`.
-4. Install application dependencies with `pip install -r requirements.txt`.
 
 
 # 🚢 Step 3: Deploy and run the MovieBot App
@@ -47,6 +48,7 @@ Now that you have built your application, you can deploy it locally within your 
 * The loaded docs are indexed using Instructor-Large model and GPTVectorStoreIndex from llama_index package.
 * User inputs are queried against this index using QueryEngine from LlamaIndex. 
 * The relevant text from the index is then sent to the OctoAI LLM endpoint using langchain. 
+* Responses from the OctoAI API are displayed in the Streamlit chat interface
 
 # 📚 Next Steps
 If you have any questions or comments, please check our [docs](https://docs.octoai.cloud/docs) or reach out and ask a question directly in our [discord community](https://discord.com/invite/rXTPeRBcG7)!  We look forward to seeing what you build next!
