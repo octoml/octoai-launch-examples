@@ -315,7 +315,7 @@ Like before, we will be using Streamlit to run our chat application. The code fo
 3. Activate conda environment with `conda activate moviebotapp`.
 4. Install the only library you’ll need using `pip install streamlit`.
 
-## 🚢 Step 3: Deploy and run the MovieBot App
+## 🚢 Step 4: Deploy and run the MovieBot App
 
 Now that you have built your application, you can deploy it locally within your conda environment using the pre-built script that we’ve provided. Here’s how:
 
