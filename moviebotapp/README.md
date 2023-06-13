@@ -15,20 +15,17 @@ This walkthrough assumes you already have some basic familiarity with the OctoAI
 # 🧑‍💻 Step 1: Create a new OctoAI Endpoint from a Template
 * Go to [OctoAI](https://octoai.cloud/), click `Endpoints`, and select "Chatbot (Research-Only)" from the template cards to use the [mpt-7b-demo](https://octoai.cloud/templates/mpt-7b-demo) template.
 * You can experiment with the conversational outputs of this LLM by typing a prompt into the `Prompt1` field and clicking `Generate`.
-* When you're ready, copy the `Endpoint URL` and past
-* When you're ready to build your own production-grade chatbot, click the `Clone` button below the cURL Example to create a new endpoint from this template. 
-
-
+* When you're ready to build your own production-grade chatbot, click the `Clone` button below the cURL Example to create a new endpoint from this template.
+* Copy the `Endpoint URL`
 
 # 🧑‍💻 Step 2: Build the MovieBot Application
 Like before, we will be using Streamlit to run our chat application. The code for this application is in the `/moviebot` folder of this repo. 
-* If you haven't already, clone this repo to your local machine using `git clone`. 
-* Be sure your `OCTOAI_API_KEY` is set as an environment variable. 
-* Set the environment variable `ENDPOINT_URL` to the endpoint URL of the chat service. 
-* If you haven't already, create a new `OCTOAI_API_TOKEN`. You can create new keys under "Settings" (the gear icon to the left) in the OctoAI dashboard.
+* Clone this repo to your local machine using `git clone`. 
+* Create a new `OCTOAI_API_TOKEN`. You can create new keys under "Settings" (the gear icon to the left) in the OctoAI dashboard.
+* Be sure your `OCTOAI_API_TOKEN` is set in your '/.streamlit/secrets.toml' file as `OCTOAI_API_TOKEN="<paste token here>"`
+* Add your ENDPOINT_URL to the '/.streamlit/secrets.toml' file as `ENDPOINT_URL="<paste url here>"`. 
 
 # 💻 Step 3: Create a New Virtual Environment & Install Streamlit
-
 1. Install the appropriate version of [Miniconda](https://docs.conda.io/en/latest/miniconda.html) for your OS.
 2. From the terminal, create a conda environment using `conda create --name moviebotapp`.
 3. Activate conda environment with `conda activate moviebotapp`.
@@ -36,9 +33,7 @@ Like before, we will be using Streamlit to run our chat application. The code fo
 
 
 # 🚢 Step 3: Deploy and run the MovieBot App
-
 Now that you have built your application, you can deploy it locally within your conda environment using the pre-built script that we’ve provided. Here’s how:
-
 1. From your terminal window, `cd` into `/moviebotapp` folder where `streamlit_app.py` is located
 2. Run this command: `streamlit run chatbot.py`
 3. Open a browser window and navigate to `localhost:8501` to see your application running.
