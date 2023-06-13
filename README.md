@@ -46,15 +46,14 @@ To use the OctoAI compute service, first sign up for an account and get your cre
 - Click `Clone` .
 - Copy your `API Key` and your `Endpoint URL`. You’ll need these later to connect your app to the OctoAI compute service.
 
-<details>
-  <summary  style="font-size: larger;" >Click to continue reading...</summary>
 
 ## 🧑‍💻 Step 2: Build the application
 
 Now that you have your credentials and endpoint URL, you can build a simple application that uses OctoAI to generate images from text prompts. Here’s what you need to do:
 
 1. `git clone` this repo, download the Python script `streamlit_app.py`, OR create a new file and copy + paste the text from `streamlit_app.py` into it locally on your machine.
-2. Replace `YOUR_API_KEY` and `YOUR_ENDPOINT_URL` with your actual API key and endpoint URL that you copied from the dashboard.
+2. If you cloned this repo, `cd` into the `stablediffusionapp` folder.
+2. Replace `OCTOAI_API_TOKEN` and `ENDPOINT_URL` with your actual API key and endpoint URL that you copied from the dashboard.
 3. You can change the default text prompt to anything you want. 
     
     <aside>
@@ -70,7 +69,7 @@ Now that you have your credentials and endpoint URL, you can build a simple appl
 - Activate conda environment with `conda activate stablediffapp`
 - Install the only library you’ll need using `pip install streamlit`
 
-## 🚢 Step 3: Deploy and run the application!
+## 🚢 Step 4: Deploy and run the application!
 
 Now that you have built your application, you can deploy it locally within your conda environment using the pre-built script that we’ve provided. Here’s how:
 
@@ -78,19 +77,24 @@ Now that you have built your application, you can deploy it locally within your 
 - Run this command: `streamlit run streamlit_app.py`
 - Voila! You’re application is working! Try out a few runs!
 
-![Screenshot of the completed 3-panel Stable Diffusion Image Generation Playground App, created using Streamlit and the OctoAI Compute Service.](images/StableDiffusionPlaygroundScreenshot.png)
+![Screenshot of the completed 3-panel Stable Diffusion Image Generation Playground App, created using Streamlit and the OctoAI Compute Service.](stablediffusionapp/images/StableDiffusionPlaygroundScreenshot.png)
 
 Screenshot of the completed 3-panel Stable Diffusion Image Generation Playground App, created using Streamlit and the OctoAI Compute Service.
 
-![Screenshot of each of the parameters associated with image generation in Stable Diffusion.](images/StableDiffusionPlaygroundScreenshot_image1.png)
+![Screenshot of each of the parameters associated with image generation in Stable Diffusion.](stablediffusionapp/images/StableDiffusionPlaygroundScreenshot_image1.png)
 
 Screenshot of each of the parameters associated with image generation in Stable Diffusion.
+
 
 ## 📚 [OPTIONAL] Step 4: Learn About Stable Diffusion Parameters!
 
 It is important to note that Stable Diffusion operates by first generating a  random image in the latent space of the diffusion model.  The noise predictor estimates the noise within the image, which is then subtracted from the images.  This denoising process is called sampling, and takes place in `sampling steps`.
 
-![The sampling process responsible for denoising.  Image credit: [https://stable-diffusion-art.com/samplers/](https://stable-diffusion-art.com/samplers/)](images/Denoising.png)
+<details>
+
+  <summary  style="font-size: larger;" >Click to continue reading...</summary>
+
+![The sampling process responsible for denoising.  Image credit: [https://stable-diffusion-art.com/samplers/](https://stable-diffusion-art.com/samplers/)](stablediffusionapp/images/Denoising.png)
 
 The sampling process responsible for denoising.  Image credit: [https://stable-diffusion-art.com/samplers/](https://stable-diffusion-art.com/samplers/)
 
@@ -272,18 +276,71 @@ st.image("image.png")
 ```
 
 Congratulations!  Now you understand the core components required to build a simple Stable Diffusion Application using OctoAI and Streamlit!
+
 </details>
 
 # Building a Moviebot Chat App 
-Here's some placeholder text for the MovieBot chat app instructions. We'll also have a demo video here soon.
+In this next tutorial, we'll build a chat app that let's a user ask questions about Rotten Tomatoes Top Movies Database.
 
 ## Preliminaries
+We will be using many of the same tools as last time. If you haven't already read the [Getting Started](https://docs.octoai.cloud/docs/getting-started) section of our docs, please do so now.
 
-## 🐙 Step 1: Sign up for OctoAI
-Be sure you've signed up for OctoAI. Steps to follow are found in the [Getting Started](https://docs.octoai.cloud/docs/getting-started) section of our docs.
+- [OctoAI compute service](https://octoai.cloud/): The OctoAI compute service provides fast and simple Machine Learning inference capability for us. In general, it can turn any container or Python code into a production-grade endpoint in minutes.
+- [MPT-7B ](https://huggingface.co/databricks/dolly-v2-12b): This is the open-source transformer model at the heart of our chat app. 
+- [Streamlit](https://github.com/streamlit): A tool for building lightweight, beautiful, and shareable Python-based web applications.
+- [Miniconda](https://docs.conda.io/en/latest/miniconda.html): A useful package and environment manager that includes both Python and pip out of the box. The standard Python distribution includes each of the following libraries that we’ll leverage in our application:
+    - [Requests](https://requests.readthedocs.io/en/latest/): Allows us to send and receive HTTP requests and responses using Python code. We use this library to make it easy to access the OctoML compute service; we simply provide some basic information including the URL and the stable diffusion parameters that we want to send.
+    - [LlamaIndex](https://gpt-index.readthedocs.io/en/latest/): A "data framework" for LLMs that allows us to do things like connect to documents and databases, structure our data for LLMs, run queries, and integrate with popular applications and frameworks.
+    - [Langhchain](https://python.langchain.com/en/latest/index.html): A popular library for building LLM applications, Langchain extends LLM capabilities through the use of constructs called `Agents` and `Chains`. Used in concert, these constructs allow us to build more complex applications that can be deployed to production.
 
+## 🧑‍💻 Step 1: Create a new OctoAI Endpoint from a Template
+* Go to [OctoAI](https://octoai.cloud/), click `Endpoints`, and select "Chatbot (Research-Only)" from the template cards to use the [vicuna-7b-demo](https://octoai.cloud/templates/vicuna-7b-demo) template.
+* You can experiment with the conversational outputs of this LLM by typing a prompt into the `Prompt1` field and clicking `Generate`.
+* When you're ready, copy the `Endpoint URL` and past
+* When you're ready to to build your own production-grade chatbot, click the `Clone` button below the cURL Example to create a new endpoint from this template. 
+
+
+
+## 🧑‍💻 Step 2: Build the MovieBot Application
+Like before, we will be using Streamlit to run our chat application. The code for this application is in the `/moviebot` folder of this repo. 
+* If you haven't already, clone this repo to your local machine using `git clone`. 
+* Be sure your `OCTOAI_API_KEY` is set as an environment variable. 
+* Set the environment variable `ENDPOINT_URL` to the endpoint URL of the chat service. 
+* If you haven't already, create a new `OCTOAI_API_TOKEN`. You can create new keys under "Settings" (the gear icon to the left) in the OctoAI dashboard.
+
+## 💻 Step 3: Create a New Virtual Environment & Install Streamlit
+
+1. Install the appropriate version of [Miniconda](https://docs.conda.io/en/latest/miniconda.html) for your OS.
+2. From the terminal, create a conda environment using `conda create --name moviebotapp`.
+3. Activate conda environment with `conda activate moviebotapp`.
+4. Install the only library you’ll need using `pip install streamlit`.
+
+## 🚢 Step 3: Deploy and run the MovieBot App
+
+Now that you have built your application, you can deploy it locally within your conda environment using the pre-built script that we’ve provided. Here’s how:
+
+1. From your terminal window, `cd` into `/moviebotapp` folder where `streamlit_app.py` is located
+2. Run this command: `streamlit run chatbot.py`
+3. Open a browser window and navigate to `localhost:8501` to see your application running.
+4. You can now chat with the bot and ask it questions about movies! For example:
+    * Who starred in the movie Titanic?
+    * What genre is The Matrix?
+    * When was Jurassic Park released?
+
+## How it works: 
+* Rotten Tomatoes movie data is loaded from the `.csv` file. 
+* The loaded docs are indexed using Instructor-Large model and GPTVectorStoreIndex from llama_index package.
+* User inputs are queried against this index using QueryEngine from LlamaIndex. 
+* The relevant text from the index is then sent to the OctoAI LLM endpoint using langchain. 
 
 # Query a SQL Database in Plain-English with LLMs
+In this tutorial, we query a SQL database in plain-English with the help of an OctoAI-hosted LLM.
+
+The entirety of this tutorial [is available as a Colab notebook here](https://colab.research.google.com/drive/1jPGtMcN0OAG1yXxbKUpCFTixul2ealXg). Open the link and follow the notebook instructions to try it out. 
+
+Alternatively, you can navigate into the `llms_for_dbs` folder of this repo to view the notebook and run it locally. 
+
+> **_Note_**: If you want to run it locally, you will need to perform a minimum install of `jupyter` and `ipykernel` in your conda environment.
 
 # 📚 Next Steps
 If you have any questions or comments, please check our [docs](https://docs.octoai.cloud/docs) or reach out and ask a question directly in our [discord community](https://discord.com/invite/rXTPeRBcG7)!  We look forward to seeing what you build next!
