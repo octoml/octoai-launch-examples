@@ -3,7 +3,7 @@ Welcome to the OctoAI Application Development Quickstart Guide!  This guide will
 
 If you're brand new to OctoAI, or building, running, tuning, and scaling ML-powered applications, the best place to start is the Stable Diffusion Image Generation Playground. This end-to-end example will walk you through the process of building, deploying, and sharing your own text-to-image Generative AI application powered by OctoAI.  
 
-If you're already familiar with using the OctoAI platform, keep reading to learn how to build a chatbot that can answer questions about the IMDB movie database and how to use LLMs to perform plain-english quieries on a SQL database.
+If you're already familiar with using the OctoAI platform, keep reading to learn how to build a chatbot that can answer questions about the Rotten Tomatoes Movie Database and how to use LLMs to perform plain-english quieries on a SQL database containing e-commerce transactional data.
 
 ## Table of Contents
 
