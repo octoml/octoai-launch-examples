@@ -313,7 +313,7 @@ Like before, we will be using Streamlit to run our chat application. The code fo
 1. Install the appropriate version of [Miniconda](https://docs.conda.io/en/latest/miniconda.html) for your OS.
 2. From the terminal, create a conda environment using `conda create --name moviebotapp`.
 3. Activate conda environment with `conda activate moviebotapp`.
-4. Install the only library you’ll need using `pip install streamlit`.
+4. Install the libraries you’ll need using `pip install -r requirements.txt`.
 
 ## 🚢 Step 4: Deploy and run the MovieBot App
 
