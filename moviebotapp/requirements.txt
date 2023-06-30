@@ -11,3 +11,4 @@ octoai
 transformers
 huggingface
 dill
+octoai-sdk
