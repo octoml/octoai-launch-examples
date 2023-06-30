@@ -1,11 +1,10 @@
 # Import the required libraries
 import os
-import dill
 import streamlit as st
 from pathlib import Path
 from streamlit_chat import message
-from octoai_endpoint import OctoAIEndpoint
-from octoai_embeddings import OctoAIEmbeddings
+from langchain.llms.octoai_endpoint import OctoAIEndpoint
+from langchain.embeddings.octoai_embeddings import OctoAIEmbeddings
 from llama_index import (LLMPredictor, ServiceContext,
                          download_loader, GPTVectorStoreIndex, LangchainEmbedding)
 
@@ -73,7 +72,6 @@ def create_service_context(llm_predictor, embeddings):
 
 # Create Index
 
-
 def create_index(documents, service_context):
     """Create and return GPTVectorStoreIndex instance."""
     if 'index' not in st.session_state:
@@ -88,7 +86,6 @@ def create_index(documents, service_context):
     return st.session_state['index']
 
 # Create Query Engine
-
 
 def create_query_engine(index, llm_predictor):
     """Create and return a query engine instance."""
